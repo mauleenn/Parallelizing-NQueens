@@ -3,11 +3,16 @@
 #include <time.h>
 #include <sys/time.h>
 
+// Timing execution
 double startTime, endTime;
-int numofSol = 0;
-#define N 10
 
-void setQueen(int queens[], int row, int column) {
+// Number of solutions found
+int numofSol = 0;
+
+// Board size
+#define N 4
+
+void placeQ(int queens[], int row, int column) {
     
     for(int i = 0; i < row; i++) {
 
@@ -20,7 +25,7 @@ void setQueen(int queens[], int row, int column) {
     if (abs(queens[i] - column) == (row-  i))  {
        return;
     }
-}
+} // End of placeQ
 
 // Set the queen
 queens[row] = column;
@@ -52,10 +57,10 @@ if(row == N-1) {
 else {
      // Increment row
      for(int i = 0; i < N; i++) {
-         setQueen(queens, row + 1, i);
+         placeQ(queens, row + 1, i);
      }
 }
-} // End of setQueen
+} // End of placeQ()
 
 void solve() {
     #pragma omp parallel
@@ -64,11 +69,11 @@ void solve() {
       for(int i = 0; i < N; i++) {
           #pragma omp task
           {
-              setQueen(new int[N], 0, i);
+              placeQ(new int[N], 0, i);
           }
         }
   }
-}
+} // end of solve()
 
 int main(int argc, char*argv[]) {
 
@@ -77,7 +82,7 @@ int main(int argc, char*argv[]) {
    endTime = omp_get_wtime();
   
  std::cout << "Number of solutions: " << numofSol << std::endl; 
- std::cout << "Execution time:" << endTime - startTime << "ms.\n";
+ std::cout << "Execution time:" << endTime - startTime << std::endl; 
 
 return 0;
 }

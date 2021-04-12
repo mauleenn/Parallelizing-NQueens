@@ -8,7 +8,7 @@ double startTime, endTime;
 // Number of solutions found
 int numofSol = 0;
 
-// Board size
+// Board size and number of queens
 #define N 8
 
 void placeQ(int queens[], int row, int column) {
@@ -67,6 +67,7 @@ int main(int argc, char*argv[]) {
    auto end = std::chrono::high_resolution_clock::now();
    auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
   
+ // Print board size, number of solutions, and execution time 
  std::cout << "Board Size: " << N << std::endl; 
  std::cout << "Number of solutions: " << numofSol << std::endl; 
  std::cout << "Execution time: " << elapsed.count() * 1e-9 << " seconds." << std::endl; 

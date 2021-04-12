@@ -9,7 +9,7 @@ double startTime, endTime;
 // Number of solutions found
 int numofSol = 0;
 
-// Board size
+// Board size and number of queens
 #define N 16
 
 void placeQ(int queens[], int row, int column) {
@@ -32,7 +32,7 @@ queens[row] = column;
 
 if(row == N-1) {
 
-    #pragma omp critical 
+    #pragma omp atomic 
     {
         numofSol++;  //Placed final queen, found a solution
     }
@@ -81,6 +81,7 @@ int main(int argc, char*argv[]) {
    solve();
    endTime = omp_get_wtime();
   
+ // Print board size, number of solutions, and execution time 
  std::cout << "Board Size: " << N << std::endl; 
  std::cout << "Number of solutions: " << numofSol << std::endl; 
  std::cout << "Execution time: " << endTime - startTime << " seconds." << std::endl; 

@@ -1,3 +1,5 @@
+// Sequential version of the N-Queens problem.
+
 #include <iostream>  
 #include <chrono>
 #include <sys/time.h>
@@ -11,7 +13,7 @@ int numofSol = 0;
 std::ostringstream globalOss;
 
 // Board size and number of queens
-#define N 4
+const int N = 4;
 
 void placeQ(int queens[], int row, int column) {
     
@@ -27,6 +29,7 @@ void placeQ(int queens[], int row, int column) {
     }
     // Set the queen
     queens[row] = column;
+
     if(row == N-1) {
         numofSol++;  //Placed final queen, found a solution
         
@@ -44,7 +47,6 @@ void placeQ(int queens[], int row, int column) {
         oss  << std::endl << std::endl; 
         }
     }
-    
     else {
         // Increment row
         for(int i = 0; i < N; i++) {
@@ -54,6 +56,7 @@ void placeQ(int queens[], int row, int column) {
 } // End of placeQ()
 
 void solve() {
+
     for(int i = 0; i < N; i++) {
         placeQ(new int[N], 0, i);
     }

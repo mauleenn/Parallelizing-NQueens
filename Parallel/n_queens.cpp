@@ -14,7 +14,7 @@ int numofSol = 0;
 std::ostringstream globalOss;
 
 // Board size and number of queens
-#define N 4
+const int N = 4;
 
 void placeQ(int queens[], int row, int column) {
     
@@ -54,10 +54,8 @@ void placeQ(int queens[], int row, int column) {
         #pragma omp critical
         globalOss << oss.str();
     }
-    
     else {
-        
-        // Increment row
+
         for(int i = 0; i < N; i++) {
             placeQ(queens, row + 1, i);
         }
@@ -65,6 +63,7 @@ void placeQ(int queens[], int row, int column) {
 } // End of placeQ()
 
 void solve() {
+    
     #pragma omp parallel
     #pragma omp single
     {

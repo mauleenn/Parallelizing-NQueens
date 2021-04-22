@@ -12,13 +12,14 @@ int numofSol = 0;
 // Prevents overhead caused by parallel IOs
 std::ostringstream globalOss;
 
-// Board size and number of queens
-const int N = 4;
+// Board size
+const int N = 15;
 
 void placeQ(int queens[], int row, int column) {
     
     for(int i = 0; i < row; i++) {
-        // Vertical
+        
+        // Two queens in the same row
         if (queens[i] == column) {
             return;
         }
@@ -27,11 +28,12 @@ void placeQ(int queens[], int row, int column) {
              return;
              }
     }
+
     // Set the queen
     queens[row] = column;
 
     if(row == N-1) {
-        numofSol++;  //Placed final queen, found a solution
+        numofSol++;  //Placed final queen, found a solution.
         
         std::ostringstream oss;
         oss << "The number of solutions found is: " << numofSol << std::endl; 
@@ -46,6 +48,9 @@ void placeQ(int queens[], int row, int column) {
             }
         oss  << std::endl << std::endl; 
         }
+        // Prints the chessboard but doesn't include the 
+        // printing in the overall timing of the program.
+        globalOss << oss.str();
     }
     else {
         // Increment row
@@ -53,14 +58,14 @@ void placeQ(int queens[], int row, int column) {
             placeQ(queens, row + 1, i);
         }
     }
-} // End of placeQ()
+} 
 
 void solve() {
 
     for(int i = 0; i < N; i++) {
         placeQ(new int[N], 0, i);
     }
-} // end of solve()
+} 
 
 int main(int argc, char*argv[]) {
 
@@ -71,7 +76,7 @@ int main(int argc, char*argv[]) {
 
     std::cout << globalOss.str();
 
-    // Print board size, number of solutions, and execution time 
+    // Print board size, number of solutions, and execution time. 
     std::cout << "Board Size: " << N << std::endl; 
     std::cout << "Number of solutions: " << numofSol << std::endl; 
     std::cout << "Execution time: "  << std::fixed << std::setprecision(9) << execution_time << " seconds." <<std::endl;

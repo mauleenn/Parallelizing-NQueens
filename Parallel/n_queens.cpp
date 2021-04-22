@@ -13,13 +13,14 @@ int numofSol = 0;
 // Prevents overhead caused by parallel IOs
 std::ostringstream globalOss;
 
-// Board size and number of queens
-const int N = 4;
+// Board size
+const int N = 15;
 
 void placeQ(int queens[], int row, int column) {
     
     for(int i = 0; i < row; i++) {
-        // Vertical
+        
+        // Two queens in the same row
         if (queens[i] == column) {
             return;
         }
@@ -32,6 +33,7 @@ void placeQ(int queens[], int row, int column) {
     
     // Set the queen
     queens[row] = column;
+
     if(row == N-1) {
         
         #pragma omp atomic 
@@ -50,7 +52,8 @@ void placeQ(int queens[], int row, int column) {
             }
             oss  << std::endl << std::endl; 
         }
-
+        // Prints the chessboard but doesn't include the 
+        // printing in the overall timing of the program.
         #pragma omp critical
         globalOss << oss.str();
     }
@@ -60,11 +63,11 @@ void placeQ(int queens[], int row, int column) {
             placeQ(queens, row + 1, i);
         }
     }
-} // End of placeQ()
+} 
 
 void solve() {
     
-    #pragma omp parallel
+    #pragma omp parallel 
     #pragma omp single
     {
         for(int i = 0; i < N; i++) {
@@ -75,7 +78,7 @@ void solve() {
             }
         }
     }
-} // end of solve()
+} 
 
 int main(int argc, char*argv[]) {
 

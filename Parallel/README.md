@@ -1,2 +1,2 @@
 # Parallelizing-NQueens
-Solving the N-Queens problem in parallel. 
+Solving the boardSize-Queens problem in parallel. 

@@ -13,7 +13,7 @@ int numofSol = 0;
 std::ostringstream globalOss;
 
 // Board size
-const int N = 13;
+const int boardSize = 13;
 
 void placeQ(int queens[], int row, int column) {
     
@@ -32,13 +32,13 @@ void placeQ(int queens[], int row, int column) {
     // Set the queen
     queens[row] = column;
 
-    if(row == N-1) {
+    if(row == boardSize-1) {
         numofSol++;  //Placed final queen, found a solution.
         
         std::ostringstream oss;
         oss << "The number of solutions found is: " << numofSol << std::endl; 
-        for (int row = 0; row < N; row++) {
-            for (int column = 0; column < N; column++) {
+        for (int row = 0; row < boardSize; row++) {
+            for (int column = 0; column < boardSize; column++) {
                 if (queens[row] == column) {
                     oss << "X";
                     }
@@ -54,7 +54,7 @@ void placeQ(int queens[], int row, int column) {
     }
     else {
         // Increment row
-        for(int i = 0; i < N; i++) {
+        for(int i = 0; i < boardSize; i++) {
             placeQ(queens, row + 1, i);
         }
     }
@@ -62,8 +62,8 @@ void placeQ(int queens[], int row, int column) {
 
 void solve() {
 
-    for(int i = 0; i < N; i++) {
-        placeQ(new int[N], 0, i);
+    for(int i = 0; i < boardSize; i++) {
+        placeQ(new int[boardSize], 0, i);
     }
 } 
 
@@ -77,7 +77,7 @@ int main(int argc, char*argv[]) {
     std::cout << globalOss.str();
 
     // Print board size, number of solutions, and execution time. 
-    std::cout << "Board Size: " << N << std::endl; 
+    std::cout << "Board Size: " << boardSize << std::endl; 
     std::cout << "Number of solutions: " << numofSol << std::endl; 
     std::cout << "Execution time: "  << std::fixed << std::setprecision(9) << execution_time << " seconds." <<std::endl;
 

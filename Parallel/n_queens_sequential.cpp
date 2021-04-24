@@ -13,12 +13,12 @@ int numofSol = 0;
 std::ostringstream globalOss;
 
 // Board size
-const int N = 15;
+const int N = 13;
 
 void placeQ(int queens[], int row, int column) {
     
     for(int i = 0; i < row; i++) {
-        
+
         // Two queens in the same row
         if (queens[i] == column) {
             return;

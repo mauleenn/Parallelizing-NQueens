@@ -14,7 +14,7 @@ int numofSol = 0;
 std::ostringstream globalOss;
 
 // Board size
-const int N = 15;
+const int N = 13;
 
 void placeQ(int queens[], int row, int column) {
     
